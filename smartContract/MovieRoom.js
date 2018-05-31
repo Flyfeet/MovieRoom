@@ -52,7 +52,7 @@ MovieRoom.prototype = {
         var from = Blockchain.transaction.from;
         var movieItem = this.data.get(name);
         if (movieItem){
-            throw new Error("this movie has been existed.");
+            throw new Error("电影已经存在.");
         }
 
         movieItem = new MovieItem();
@@ -69,7 +69,7 @@ MovieRoom.prototype = {
     get: function (name) {
         name = name.trim();
         if ( !name ) {
-            throw new Error("empty name.")
+            throw new Error("电影名为空.")
         }
         return this.data.get(name);
     }
