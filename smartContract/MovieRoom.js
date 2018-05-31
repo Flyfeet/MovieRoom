@@ -9,7 +9,7 @@ var MovieItem = function(text) {
 		this.author = obj.author;
 	} else {
 	    this.name = "";
-	    this.author = "";
+	    
 	}
 };
 
@@ -52,7 +52,7 @@ MovieRoom.prototype = {
         var from = Blockchain.transaction.from;
         var movieItem = this.data.get(name);
         if (movieItem){
-            throw new Error("电影已经存在.");
+            throw new Error("The movie was existed.");
         }
 
         movieItem = new MovieItem();
@@ -69,7 +69,7 @@ MovieRoom.prototype = {
     get: function (name) {
         name = name.trim();
         if ( !name ) {
-            throw new Error("电影名为空.")
+            throw new Error("Empty name.")
         }
         return this.data.get(name);
     }
