@@ -25,7 +25,7 @@
 
         .img {
             width: 15%;
-            height: 43%;
+            height: 41%;
             margin: auto;
             margin-top: 38px;
         }
@@ -37,7 +37,7 @@
 		
         #box{
             width: 820px;
-            height: 100px;
+            height: 120px;
             margin: auto;
             font-family: 'Microsoft YaHei';
             font-size: 14px;
@@ -132,7 +132,14 @@
             margin: auto;
             font-size: 20px
         }
-
+        
+        .help {
+            float: right;
+            position: absolute;
+            font-size:20px;
+            right: 300px;
+            bottom: 100px;
+        }
         .add_banner{
             width: 40%;
             margin: auto;
@@ -183,13 +190,15 @@
         .author p{
             display: inline-block;
             font-size: 20px;
-            text-shadow: -1px -1px white;
+            text-shadow: -1px -1px green;
         }
     </style>
 </head>
 
 <body>
+
 <div class="contenner">
+    <!-- <a href="#" title="这里是显示的文字" >help</a> -->
     <div class="logo">
         <br>
         <div class="name">电 影 驿 站</div>
@@ -198,9 +207,11 @@
         </div>
     </div>
     <div class="noExtension hide" id="noExtension">
-        NOTE: Please install <a target="_blank" href="https://github.com/ChengOrangeJu/WebExtensionWallet">WebExtensionWallet</a>  to use 电影驿站
+        提示: 请安装NAS钱包插件 <a target="_blank" href="https://github.com/ChengOrangeJu/WebExtensionWallet">WebExtensionWallet</a> 来使用电影驿站
     </div>
-	
+	<div class="help">
+        <a href="#" title="添加新电影前请先下载钱包插件，希望依靠群众的力量不断充实驿站的内容." >说明</a>
+    </div>
     <!-- <div class="search">
         <input id="search_value" type="search"/><button id=search>Search</button>
     </div> -->
@@ -209,11 +220,12 @@
         <div id="search">搜索一下</div>
     </div>
 	
-	
     <div class="result_success hide">
         <span style="color:white"><div id=search_banner></div></span>
-        <span style="color:white"><p id=search_result> wait for content </p></span>
-        <div class="author" style="color: green">
+
+        <span style="color:white;display:inline;word-break:break-all;word-wrap: break-word;" ><p id=search_result> 等待检索结果 </p></span>
+
+        <div class="author" style="color: green" "font-size:20px">
             <i><em> 驿工：</em> <em id=search_result_author> 就是你</em></i>
         </div>
     </div>
@@ -253,16 +265,17 @@
     	    <fieldset style ="color:white;width:90%;border:3px groove white" align=center>
     		<legend>添加</legend>
     		<br>
-            <p><label style ="color:white">名字 </label><input type="text" id="add_value_name" style = "text-align:left" placeholder="请输入电影名字"></p>
-    		<p><label style ="color:white">国家 </label><input type="text" id="add_value_country" style = "text-align:left" placeholder="请输入电影出品国家"></p>
-    		<p><label style ="color:white">类别 </label><input type="text" id="add_value_category" style = "text-align:left" placeholder="请输入电影类别"></p>
-    		<p><label style ="color:white">评分 </label><input type="text" id="add_value_score" style = "text-align:left" placeholder="请输入电影评分"></p>
-    		<p><label style ="color:white">链接 </label><input type="text" id="add_value_links" style = "text-align:left" placeholder="请输入电影下载链接"></p>
+            <p><label style ="color:white">电影名字 </label><input type="text" id="add_value_name" style = "text-align:left" placeholder="请输入电影名字"></p>
+    		<p><label style ="color:white">制片地区 </label><input type="text" id="add_value_country" style = "text-align:left" placeholder="请输入电影出品国家"></p>
+    		<p><label style ="color:white">电影类型 </label><input type="text" id="add_value_category" style = "text-align:left" placeholder="请输入电影类别"></p>
+    		<p><label style ="color:white">电影评分 </label><input type="text" id="add_value_score" style = "text-align:left" placeholder="请输入电影评分"></p>
+    		<p><label style ="color:white">下载链接 </label><input type="text" id="add_value_links" style = "text-align:left" placeholder="请输入电影下载链接"></p>
             <button id="push">确定</button>
     		<br>
     		</fieldset>
     	</form>
     </div>
+
 </div>
 <script src=lib/jquery-3.3.1.min.js></script>
 <script src=lib/nebPay.js></script>
@@ -272,12 +285,12 @@
 
     "use strict";
 
-    var dappAddress = "n1zCMYUx3er8YcfFNFKz4bGnkcESBS4bAce";//n1KfDupNa8d9JXUF6E4ABva5dJdCSezyg1K；n1oXdmwuo5jJRExnZR5rbceMEyzRsPeALgm；n1uDxQ61DpU8SGAd8YGV2Av89WSwG9Rg464；n1zCMYUx3er8YcfFNFKz4bGnkcESBS4bAce
+    var dappAddress = "n1nCcMhX3pJQ2XSnZyPyUxa9YP1c8sd8fZm";//n1uDxQ61DpU8SGAd8YGV2Av89WSwG9Rg464；n1zCMYUx3er8YcfFNFKz4bGnkcESBS4bAce；n1nCcMhX3pJQ2XSnZyPyUxa9YP1c8sd8fZm
 
     var nebulas = require("nebulas"),
         Account = nebulas.Account,
         neb = new nebulas.Neb();
-    neb.setRequest(new nebulas.HttpRequest("https://testnet.nebulas.io"));
+    neb.setRequest(new nebulas.HttpRequest("https://mainnet.nebulas.io"));
 
     function clearn(){
 
@@ -304,7 +317,7 @@
         neb.api.call(from,dappAddress,value,nonce,gas_price,gas_limit,contract).then(function (resp) {
             MSearch(resp)
         }).catch(function (err) {
-            //MSearch(err)
+            MSearch(err)
             console.log("error:1" + err.message)
         })
 
@@ -333,14 +346,8 @@
             if (!!result.name){      //"return value"
                 $(".add_banner").addClass("hide");
                 $(".result_faile").addClass("hide");
-
-                // $("#search_banner").text($("#input_search").val())
-                $("#search_result").html("名称："+" "+result.name +"<br>"+"国家："+" "+result.country+"<br>"+"类型："+" "+result.category+"<br>"+"评分："+" "+result.score+"<br>"+"链接："+" "+result.links);
-                // var pDom = document.getElementsByTagName('p')[4];
-                // var pText = pDom.innerText;
-                // pDom.innerHTML = pText.replace(/(result.links)/ig, '<a href=#result.links>$1</a>');
+                $("#search_result").html("电影名称："+" "+result.name +"<br>"+"制片地区："+" "+result.country+"<br>"+"电影类型："+" "+result.category+"<br>"+"电影评分："+" "+result.score+"<br>"+"下载链接："+" "+ result.links);
                 $("#search_result_author").text(result.author)
-
                 $(".result_success").removeClass("hide")
             } else {        //"error message"
                 $(".add_banner").addClass("hide");
@@ -349,7 +356,6 @@
                 $("#search_banner").text($("#input_search").val())
                 $("#search_result").text(result)
                 $("#search_result_author").text("")
-
                 $(".result_success").removeClass("hide");
             }
 
@@ -397,7 +403,7 @@
                 console.log("tx result: " + resp)   //resp is a JSON string
                 var respObject = JSON.parse(resp)
                 if(respObject.code === 0){
-                    alert(`set ${$("#input_search").val()} succeed!`)
+                    alert(`添加 ${$("#input_search").val()} 成功!`)
                     clearInterval(intervalQuery)
                 }
             })
