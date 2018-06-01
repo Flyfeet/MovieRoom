@@ -9,7 +9,6 @@ var MovieItem = function(text) {
 		this.author = obj.author;
 	} else {
 	    this.name = "";
-	    
 	}
 };
 
